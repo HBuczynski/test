@@ -1,0 +1,38 @@
+name: lint
+
+# on events
+on:
+  push:
+    branches:
+      - master
+      - 'feature/*'
+  pull_request:
+    branches:
+      - master
+      - 'feature/*'
+
+jobs:
+    codespell-pr:
+    if: github.event_name == 'pull_request'
+    name: codespell-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # current PR merge commit + 1 back
+
+      - name: codespell
+        uses: codespell-project/actions-codespell@v2
+        with:
+          check_filenames: true
+
+  shellcheck-pr:
+    if: github.event_name == 'pull_request'
+    name: shellcheck-pr
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: reviewdog/action-shellcheck@v1
+        with:
+          reporter: github-pr-review
