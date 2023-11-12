@@ -24,6 +24,7 @@ jobs:
           uses: codespell-project/actions-codespell@v2
           with:
             check_filenames: true
+            github_token: ${{ secrets.github_token }}
             reporter: github-pr-review
 
     shellcheck-pr:
@@ -31,6 +32,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
-        - uses: circleci/shellcheck@3.1.2
+        - uses: reviewdog/action-shellcheck@v1
           with:
+            github_token: ${{ secrets.github_token }}
             reporter: github-pr-review
