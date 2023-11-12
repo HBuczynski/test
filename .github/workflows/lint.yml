@@ -26,18 +26,18 @@ jobs:
           exclude: "./.git/*" # Optional.
           check_all_files_with_shebangs: "false" # Optional.
 
-    codespell-pr:
-      name: codespell-pr
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout current repo
-          uses: actions/checkout@v3
-          with:
-            fetch-depth: 2  # current PR merge commit + 1 back
+  codespell-pr:
+    name: codespell-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # current PR merge commit + 1 back
 
-        - name: codespell
-          uses: codespell-project/actions-codespell@v2
-          with:
-            check_filenames: true
-            github_token: ${{ secrets.github_token }}
-            reporter: github-pr-review
+      - name: codespell
+        uses: codespell-project/actions-codespell@v2
+        with:
+          check_filenames: true
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
