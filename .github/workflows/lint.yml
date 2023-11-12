@@ -24,12 +24,13 @@ jobs:
           uses: codespell-project/actions-codespell@v2
           with:
             check_filenames: true
+            reporter: github-pr-review
 
     shellcheck-pr:
       name: shellcheck-pr
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
-        - uses: reviewdog/action-shellcheck@v1
+        - uses: circleci/shellcheck@3.1.2
           with:
             reporter: github-pr-review
