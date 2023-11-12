@@ -2,6 +2,11 @@
 
 set -e
 
+test_var="foo"
+
+# Testing behavir of the new scrit
+echo ${test_var}
+
 function loading_icon() {
     local load_interval="${1}"
     local loading_message="${2}"
@@ -31,12 +36,12 @@ function loadind_icon2() {
     tput civis
     trap "tput cnorm" EXIT
 
-    while [ "${load_interval}" -ne "${elapsed}" ]; do
+    while [ "${load_interval}" -ne ${elapsed} ]; do
         # Frame #1
         printf "\r< %s " "${loading_message}"
         sleep 0.5
         # Frame #2
-        printf "\r> %s " "${loading_message}"
+        printf "\r> %s " ${loading_message}
         sleep 0.5
 
         elapsed=$(( elapsed + 1 ))
