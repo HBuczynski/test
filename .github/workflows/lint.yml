@@ -11,33 +11,25 @@ on:
   workflow_dispatch:
   
 jobs:
-  shellcheck:
-    name: runner / shellcheck
+  shellcheck-pr:
+    if: github.event_name == 'pull_request'
+    name: shellcheck-pr
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: shellcheck
-        uses: reviewdog/action-shellcheck@v1
+      - uses: reviewdog/action-shellcheck@v1
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review # Change reporter.
-          path: "." # Optional.
-          pattern: "*.sh" # Optional.
-          exclude: "./.git/*" # Optional.
-          check_all_files_with_shebangs: "false" # Optional.
+          reporter: github-pr-review
 
-  codespell-pr:
-    name: codespell-pr
+  codespell:
+    name: runner / codespell
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout current repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2  # current PR merge commit + 1 back
-
+      - name: Check out code.
+        uses: actions/checkout@v1
       - name: codespell
-        uses: codespell-project/actions-codespell@v2
+        uses: plettich/action-codespell@master
         with:
-          check_filenames: true
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
