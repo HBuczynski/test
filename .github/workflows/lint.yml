@@ -23,8 +23,6 @@ jobs:
           reporter: github-pr-review
           fail_on_error: true
           filter_mode: file
-          level: warning
-
 
   codespell:
     name: runner / codespell
