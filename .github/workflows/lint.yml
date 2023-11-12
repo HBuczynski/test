@@ -1,16 +1,15 @@
 name: lint
 
 # on events
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches:
-      - master
-      - 'feature/*'
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - master
-      - 'feature/*'
-
+    branches: [ "main" ]
+  workflow_dispatch:
+  
 jobs:
     codespell-pr:
       name: codespell-pr
