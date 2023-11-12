@@ -19,7 +19,7 @@ function loading_icon() {
     # on top of the animation while it lasts
     tput civis
     trap "tput cnorm" EXIT
-    while [ ${load_interval} -ne ${elapsed} ]; do
+    while [ "${load_interval}" -ne "${elapsed}" ]; do
         for frame in "${loading_animation[@]}" ; do
             printf "%s\b" "${frame}"
             sleep 0.25
@@ -38,7 +38,7 @@ function loadind_icon2() {
 
     while [ "${load_interval}" -ne "${elapsed}" ]; do
         # Frame #1
-        printf "\r< %s " "${loading_message}"
+        printf "\r< %s " ${loading_message}
         sleep 0.5
         # Frame #2
         printf "\r> %s " "${loading_message}"
